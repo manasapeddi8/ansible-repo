@@ -1,0 +1,30 @@
+---
+- name: This is a sample playbook partitioning
+  hosts: ansible214-c-vm1
+  tasks:
+    - name: Task1
+      parted:
+        device: /dev/sdd
+        number: 1
+        part_end: 500MiB
+        state: present
+    - name: Task2
+      lvg:
+        vg: vg1
+        pvs: /dev/sdd1
+        pesize: 16M
+    - name: task3
+      lvol:
+        vg: vg1
+        lv: test
+        size: 400M
+    - name:
+      filesystem:
+        fstype: xfs
+        dev: /dev/vg1/test
+    - name: Task3
+      mount:
+        path: /mnt_xfs
+        src: /dev/vg1/test
+        fstype: xfs
+        state: mounted	  

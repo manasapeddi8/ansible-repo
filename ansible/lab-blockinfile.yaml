@@ -1,0 +1,14 @@
+---
+
+- name: This play adds a string
+  hosts: linux
+  tasks:
+    - name: Task1
+      blockinfile:
+        path: /tmp/conditional
+        insertafter: EOF
+        backup: yes
+        state: present
+        block: |
+          This is my CentOS VM
+      when: ansible_distribution_version == "8.2" and ansible_kernel == "4.18.0-193.el8.x86_64"

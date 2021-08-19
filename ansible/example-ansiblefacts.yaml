@@ -1,0 +1,11 @@
+---
+- name: This play will gather ansible facts
+  hosts: ansi214-w-vm1
+  gather_facts: true
+  tasks:
+   - name: Show all facts
+     debug:
+       var: ansible_facts
+   - name: Show specific facts
+     debug:
+       msg: Hostanme is {{ ansible_facts['fqdn']  }} and ip address is {{ansible_facts['ip_addresses']}} and short hostname is {{ ansible_facts['hostname']}}

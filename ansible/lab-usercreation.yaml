@@ -1,0 +1,12 @@
+---
+- name: This play shows user presence
+  hosts: linux
+  tasks:
+    - name: Task1
+      command: cat /etc/passwd
+      register: users
+      
+    - name: Task2
+      debug:
+        msg: "This server has user with name user1"
+      when: users.stdout.find('user1') != -1

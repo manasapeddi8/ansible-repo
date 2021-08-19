@@ -1,0 +1,16 @@
+---
+- name: This play installs bind and evolution packages
+  hosts: ansible214-c-vm1
+  tasks:
+    - name: Task1
+      yum:
+        name: "{{ packageslist }}"
+        state: present
+      register: result
+    - name: Show output
+      debug:
+        var: result
+    - name: show names
+      debug:
+        msg: The packages installed are {{ result['results'] }}
+

@@ -1,0 +1,8 @@
+---
+- name: This play installs bind and evolution packages
+  hosts: linux
+  tasks:
+    - name: Task1
+      yum:
+        name: "{{ packageslist }}"
+        state: present

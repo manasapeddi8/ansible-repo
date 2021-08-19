@@ -1,0 +1,35 @@
+---
+- name: This play defines variable definitions with user and group creation
+  hosts: ansible214-c-vm1
+  vars:
+   userlist1: user10
+   userlist2: user20
+   grouplist1: group10
+   grouplist2: group20
+  tasks:
+    - name: Task1
+      group:
+        name: "{{ grouplist1 }}"
+        state: present
+    - name: task2
+      group:
+        name: "{{ grouplist2 }}"
+        state: present
+    - name: Task3
+      user:
+        name: "{{ userlist1 }}"
+        uid: 1800
+        groups: "{{ grouplist1 }}"
+        append: 1
+    - name: Task4
+      user:
+        name: "{{ userlist2 }}"
+        uid: 1900
+        groups: "{{ grouplist2 }}"
+        append: 1
+        shell: /bin/bash
+        home: /home/ "{{ userlist2 }}"
+      register: output_var
+    - name: output value
+      debug:
+        var: output_var

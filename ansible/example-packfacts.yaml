@@ -1,0 +1,10 @@
+---
+- name: This play will gather package facts
+  hosts: ansible214-c-vm1
+  tasks:
+   - name: Show packafe facts
+     package_facts:
+       manager: auto
+   - name: List package setup version
+     debug:
+       msg: version of package setup is {{ packages['setup'][0].version}}
